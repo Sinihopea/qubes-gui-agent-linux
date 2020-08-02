@@ -39,6 +39,7 @@ URL:            http://www.qubes-os.org
 %if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
 BuildRequires:  libpulse-devel >= 0.9.21, libpulse-devel <= 13.0
 BuildRequires:  xorg-x11-devel
+BuildRequires:  xorg-x11-server-sdk
 %else
 BuildRequires:  pulseaudio-libs-devel >= 0.9.21, pulseaudio-libs-devel <= 13.0
 BuildRequires:  xorg-x11-server-devel
@@ -50,6 +51,7 @@ BuildRequires:  libXdamage-devel
 BuildRequires:  libXt-devel
 BuildRequires:  libtool-ltdl-devel
 BuildRequires:  pam-devel
+BuildRequires:  systemd
 BuildRequires:  qubes-libvchan-@BACKEND_VMM@-devel
 BuildRequires:  qubes-gui-common-devel >= 4.1.0
 BuildRequires:  qubes-db-devel
@@ -183,8 +185,8 @@ rm -f %{name}-%{version}
 /etc/qubes-rpc/qubes.SetMonitorLayout
 /etc/qubes/post-install.d/20-qubes-guivm-gui-agent.sh
 %config /etc/sysconfig/desktop
-/lib/systemd/system/qubes-gui-agent.service
-/lib/udev/rules.d/70-master-of-seat.rules
+%{_unitdir}/qubes-gui-agent.service
+/usr/lib/udev/rules.d/70-master-of-seat.rules
 /usr/lib/tmpfiles.d/qubes-session.conf
 /usr/lib/sysctl.d/30-qubes-gui-agent.conf
 /usr/lib/qubes/qubes-gui-agent-pre.sh
